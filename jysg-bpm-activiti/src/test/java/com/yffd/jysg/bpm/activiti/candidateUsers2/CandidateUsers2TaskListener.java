@@ -1,0 +1,28 @@
+package com.yffd.jysg.bpm.activiti.candidateUsers2;
+
+import org.activiti.engine.delegate.DelegateTask;
+import org.activiti.engine.delegate.TaskListener;
+
+/**
+ * @Description  简单描述该类的功能（可选）.
+ * @Date		 2018年7月18日 下午4:26:59 <br/>
+ * @author       zhangST
+ * @version		 1.0
+ * @since		 JDK 1.7+
+ * @see 	 
+ */
+@SuppressWarnings("serial")
+public class CandidateUsers2TaskListener implements TaskListener {
+
+	@Override
+	public void notify(DelegateTask delegateTask) {
+		//个人任务：通过类去查询数据库，将下一个任务的办理人查询获取，然后通过setAssignee()的方法指定任务的办理人
+		//delegateTask.setAssignee("灭绝师太");
+		
+		//指定个人任务的办理人，也可以指定组任务的办理人
+		delegateTask.addCandidateUser("郭靖");
+		delegateTask.addCandidateUser("黄蓉");
+	}
+
+}
+
