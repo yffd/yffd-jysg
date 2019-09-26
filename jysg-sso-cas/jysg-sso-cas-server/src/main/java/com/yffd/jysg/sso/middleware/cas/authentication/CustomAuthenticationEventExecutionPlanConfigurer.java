@@ -33,7 +33,7 @@ public class CustomAuthenticationEventExecutionPlanConfigurer implements Authent
      */
     @Bean
     public AuthenticationHandler customAuthenticationHandler() {
-        return new com.yffd.jysg.sso.middleware.cas.authentication.CustomUsernamePasswordAuthenticationHandler(com.yffd.jysg.sso.middleware.cas.authentication.CustomUsernamePasswordAuthenticationHandler.class.getSimpleName(),
+        return new CustomUsernamePasswordAuthenticationHandler(CustomUsernamePasswordAuthenticationHandler.class.getSimpleName(),
                 servicesManager, new DefaultPrincipalFactory(), 1);
     }
 }

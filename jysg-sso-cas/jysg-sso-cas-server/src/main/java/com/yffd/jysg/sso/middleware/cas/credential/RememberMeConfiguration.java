@@ -1,6 +1,5 @@
 package com.yffd.jysg.sso.middleware.cas.credential;
 
-import com.yffd.jysg.sso.middleware.cas.credential.CustomRememberMeUsernamePasswordAuthenticationHandler;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlan;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 import org.apereo.cas.authentication.AuthenticationHandler;

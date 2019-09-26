@@ -31,7 +31,7 @@ public class CustomRememberMeUsernamePasswordAuthenticationHandler extends Abstr
 
     @Override
     protected AuthenticationHandlerExecutionResult doAuthentication(Credential credential) throws GeneralSecurityException, PreventedException {
-        com.yffd.jysg.sso.middleware.cas.credential.CustomRememberMeUsernamePasswordCredential myCredential = (com.yffd.jysg.sso.middleware.cas.credential.CustomRememberMeUsernamePasswordCredential) credential;
+        CustomRememberMeUsernamePasswordCredential myCredential = (CustomRememberMeUsernamePasswordCredential) credential;
         LOG.info("自定义CustomRememberMeUsernamePasswordAuthenticationHandler#doAuthentication");
         String requestCaptcha = myCredential.getCaptcha();
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -73,6 +73,6 @@ public class CustomRememberMeUsernamePasswordAuthenticationHandler extends Abstr
 
     @Override
     public boolean supports(Credential credential) {
-        return credential instanceof com.yffd.jysg.sso.middleware.cas.credential.CustomRememberMeUsernamePasswordCredential;
+        return credential instanceof CustomRememberMeUsernamePasswordCredential;
     }
 }
