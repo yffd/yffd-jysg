@@ -2,39 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jysg-sso-cas</artifactId>
+        <groupId>com.yffd.jysg</groupId>
+        <version>1.0.0</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yffd.jysg</groupId>
-    <artifactId>jysg-sso-cas</artifactId>
+    <artifactId>jysg-sso-cas-management</artifactId>
     <version>1.0.0</version>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>jysg-sso-cas-server</module>
-        <module>jysg-sso-cas-app1</module>
-        <module>jysg-sso-cas-app2</module>
-        <module>jysg-sso-cas-rest</module>
-        <module>sso-cas-client-spring-boot-starter</module>
-        <module>jysg-sso-cas-management</module>
-    </modules>
+    <packaging>war</packaging>
 
     <properties>
+        <cas-mgmt.version>5.3.6</cas-mgmt.version>
         <cas.version>5.3.2</cas.version>
         <springboot.version>1.5.18.RELEASE</springboot.version>
-        <!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan to provide appserver -->
-        <app.server>-tomcat</app.server>
-
         <mainClassName>org.springframework.boot.loader.WarLauncher</mainClassName>
         <isExecutable>false</isExecutable>
-        <manifestFileToUse>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF</manifestFileToUse>
-
-        <shiro-spring.version>1.4.0</shiro-spring.version>
-        <mysql-connector-java.version>5.1.43</mysql-connector-java.version>
-        <!-- 日志框架 -->
-        <slf4j.version>1.7.25</slf4j.version>
-        <logback.version>1.2.3</logback.version>
-
-        <junit.version>4.12</junit.version>
+        <manifestFileToUse>${project.build.directory}/war/work/org.apereo.cas/cas-management-webapp/META-INF/MANIFEST.MF</manifestFileToUse>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -42,9 +27,28 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-management-webapp</artifactId>
+            <version>${cas-mgmt.version}</version>
+            <type>war</type>
+        </dependency>
+        <!-- 开启持久化 -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-drivers</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jpa-service-registry</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
     </dependencies>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -54,52 +58,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring</artifactId>
-                <version>${shiro-spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector-java.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- slf4j核心抽象日志框架，程序中统一调用日志接口，使程序中的日志系统面向抽象，而不是具体的实现 -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <!-- 采用 logback + slf4j 打印日志，不使用log4j打印日志 -->
-            <!-- 声明slf4j的底层实现是logback，是企业级开发高性能日志框架，非常优化的实现了slf4j -->
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-            <!-- 日志桥接工具：排除现有commons-logging依赖的影响 -->
-            <!-- 如果项目的jar包中有commons-logging打印日志，jcl动态桥架工具会将其骗到slf4j的日志系统中 -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jcl-over-slf4j</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
@@ -134,7 +94,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <warName>cas</warName>
+                    <warName>cas-management</warName>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <recompressZippedFiles>false</recompressZippedFiles>
                     <archive>
@@ -144,7 +104,7 @@
                     <overlays>
                         <overlay>
                             <groupId>org.apereo.cas</groupId>
-                            <artifactId>cas-server-webapp${app.server}</artifactId>
+                            <artifactId>cas-management-webapp</artifactId>
                         </overlay>
                     </overlays>
                 </configuration>
@@ -155,7 +115,7 @@
                 <version>3.3</version>
             </plugin>
         </plugins>
-        <finalName>cas</finalName>
+        <finalName>cas-management</finalName>
     </build>
 
 </project>

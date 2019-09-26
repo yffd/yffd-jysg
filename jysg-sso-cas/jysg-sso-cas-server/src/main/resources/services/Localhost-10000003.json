@@ -1,0 +1,15 @@
+{
+  "@class": "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId": "^(http)://localhost.*",
+  "name": "Localhost",
+  "id": 10000003,
+  "description": "这是一个本地允许的服务，通过localhost访问都允许通过",
+  "evaluationOrder": 1
+}
+//@class：必须为org.apereo.cas.services.RegisteredService的实现类，对其他属性进行一个json反射对象，常用的有RegexRegisteredService，匹配策略为serviceId的正则表达式
+//serviceId：唯一的服务id
+//name： 服务名称，会显示在默认登录页
+//id：全局唯一标志
+//description：服务描述，会显示在默认登录页
+//evaluationOrder： 匹配争取时的执行循序
+//theme：主题

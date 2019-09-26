@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.yffd.jysg.sso.middleware.cas.config.SpringConfig,\
+com.yffd.jysg.sso.middleware.cas.authentication.CustomAuthenticationEventExecutionPlanConfigurer,\
+com.yffd.jysg.sso.middleware.cas.authentication.shiro.CustomShiroAuthenticationEventExecutionPlanConfigurer,\
+com.yffd.jysg.sso.middleware.cas.credential.RememberMeConfiguration,\
+com.yffd.jysg.sso.middleware.cas.credential.CustomCasWebflowConfiguration

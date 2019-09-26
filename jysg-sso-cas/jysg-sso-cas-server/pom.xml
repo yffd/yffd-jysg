@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jysg-sso-cas</artifactId>
+        <groupId>com.yffd.jysg</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jysg-sso-cas-server</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yffd.jemsp</groupId>
+            <artifactId>jemsp-module-support</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-webapp${app.server}</artifactId>
+            <version>${cas.version}</version>
+            <type>war</type>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--新增支持jdbc验证（4种方式）begin -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-drivers</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!--mysql驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--新增支持jdbc验证（4种方式）end -->
+
+        <!-- 自定义认证 begin -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-webflow</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!-- 自定义认证 end -->
+
+        <!-- shiro 认证 begin -->
+        <!-- 官网文档方式：在配置文件（shiro.ini）中写死几个用户和权限，并没有进行数据库操作-->
+        <!--<dependency>-->
+        <!--<groupId>org.apereo.cas</groupId>-->
+        <!--<artifactId>cas-server-support-shiro-authentication</artifactId>-->
+        <!--<version>${cas.version}</version>-->
+        <!--</dependency>-->
+        <!-- 自定义方式cas服务端继承shiro -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-generic</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.yffd.jemsp</groupId>-->
+        <!--<artifactId>cas-client-spring-boot-starter</artifactId>-->
+        <!--<version>1.0.0</version>-->
+        <!--</dependency>-->
+        <!-- shiro 认证 end -->
+
+        <!-- rest 认证 -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-rest-authentication</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <!-- 动态添加 services -->
+        <!--<dependency>-->
+        <!--<groupId>org.apereo.cas</groupId>-->
+        <!--<artifactId>cas-server-support-jpa-service-registry</artifactId>-->
+        <!--<version>${cas.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-services-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication-attributes</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <!-- 自定义凭证 Credential -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-webflow-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 分布式部署
+            ticket存入redis
+            session存入redis
+         -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-redis-ticket-registry</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-webapp-session-redis</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+    </dependencies>
+</project>
