@@ -27,16 +27,16 @@
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
-            <!-- log4j2 api -->
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <!--<version>${log4j.version}</version>-->
-        </dependency>
-        <dependency>
             <!-- log4j2 核心包 -->
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <!-- log4j2 api -->
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <!--<version>${log4j.version}</version>-->
         </dependency>
         <dependency>
             <!-- log4j2 对 Web Servlet 支持 -->

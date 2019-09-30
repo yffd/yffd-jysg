@@ -136,7 +136,7 @@
             <appender-ref ref="Console"/>
         </logger>
         <!-- 默认的root的logger -->
-        <root level="${output.log.level}" includeLocation="false">
+        <root level="${output.log.level}" includeLocation="true">
             <appender-ref ref="RollingFile"/>
             <appender-ref ref="Console"/>
             <appender-ref ref="InfoFile"/>
