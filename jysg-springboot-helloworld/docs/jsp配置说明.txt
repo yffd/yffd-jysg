@@ -1,0 +1,50 @@
+开发环境
+1.在src/main目录下创建目录webapp/WEB-INF/jsp用于存放jsp页面
+2.application.properties配置Jsp信息
+    spring.mvc.view.prefix=/WEB-INF/jsp
+    spring.mvc.view.suffix=.jsp
+3.pom.xml添加JSP配置
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <!-- 外置tomcat部署时需要添加该依赖，用于打包阶段排除tomcat相关jar的依赖 -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-tomcat</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <!-- 引入springboot内嵌tomcat对jsp的解析包，用于编译jsp -->
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <!-- servlet支持开启 -->
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <!--jstl标签支持开启 -->
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <scope>provided</scope>
+    </dependency>
+
+外置tomcat环境
+1.入口类继承SpringBootServletInitializer，并重写configure方法
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    	return builder.sources(JysgSpringbootHelloworldApplication.class);
+    }
+2.需要添加
+    <packaging>war</packaging>
+    如果打包为jar包的时候，不会包含JSP文件，所以访问的时候回404，而打包为war的时候会包含JSP文件，所以需要把打包格式修改为war；
+    如果使用IDEA生成war包，则可不用添加该配置；
+
+
+注：
+1.使用springboot内置的tomcat启动时，需要使用maven的spring-boot:run命令启动；
+
