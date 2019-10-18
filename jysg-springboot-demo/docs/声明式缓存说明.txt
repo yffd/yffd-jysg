@@ -1,0 +1,35 @@
+1.集成redis缓存
+1.1 application.properties
+    #指定spring的缓存为redis
+    spring.cache.type=redis
+
+1.2 在启动文件Application.java设置开启全局缓存
+    @EnableCaching
+
+1.3 使用注解
+    @Cacheable 设置并读取缓存（第一次设置以后直接读取）；
+    @CachePut 更新缓存（每次删除并更新缓存结果）；
+    @CacheEvict 删除缓存（只删除缓存）；
+
+2.分布式session共享
+2.1 添加依赖
+    <dependency>
+        <groupId>org.springframework.session</groupId>
+        <artifactId>spring-session-data-redis</artifactId>
+    </dependency>
+
+2.2 在启动文件Application.java设置开启缓存
+    @EnableCaching
+    @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
+    其中maxInactiveIntervalInSeconds为Session过期时间，默认30分钟，设置单位为秒
+
+2.3 使用Session
+    @RequestMapping("/uid")
+    public String testSession(HttpSession session) {
+        UUID uid = (UUID) session.getAttribute("uid");
+        if (uid == null) {
+            uid = UUID.randomUUID();
+        }
+        session.setAttribute("uid", uid);
+        return session.getId();
+    }
