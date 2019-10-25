@@ -1,0 +1,53 @@
+
+
+传统Session认证过程
+    1、用户向服务器发送用户名和密码。
+    2、服务器验证后在当前对话（session）中保存相关数据。
+    3、服务器向客户端（浏览器）返回sessionId，写入客户端 Cookie。
+    4、客户端每次请求，需要通过 Cookie，将 sessionId 回传服务器。
+    5、服务器收到 sessionId，验证客户端。
+
+    存在问题：
+    1、session保存在服务端，客户端访问高并发时，服务端压力大。
+    2、扩展性差，服务器集群，就需要 session 数据共享。
+
+JWT主要应用场景
+    身份认证：用户完成登录认证，接下来的每个请求都携带JWT；
+    信息交换：传递的信息是被签名的，不能被篡改；
+
+JWT组成
+    JWT格式的输出是以.分隔的三段Base64编码，使用RSA公钥密钥的形式进行签名。（形式：xxxxx.yyy.zzz）：
+    1、Header：头部
+        在header中通常包含了两部分，Token类型以及采用加密的算法；
+    2、Payload：负载
+        Token的第二部分是负载，它包含了Claim，Claim是一些实体（一般都是用户）的状态和额外的数据组成；
+    3、Signature：签名
+        创建签名需要使用编码后的header和payload以及一个秘钥，使用header中指定签名算法进行签名；
+
+JWT认证流程
+    1、客户端通过用户名和密码登录服务器；
+    2、服务端对客户端身份进行验证；
+    3、服务器认证以后，生成一个 JSON 对象，返回客户端；
+    4、客户端与服务端通信的时候，都要返回这个 JSON 对象；
+    5、服务端解析该JSON对象，获取用户身份；
+    6、服务端可以不必存储该JSON（Token）对象，身份信息都可以解析出来。
+
+配置说明
+    添加pom依赖：
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>0.10.7</version>
+    </dependency>
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>0.10.7</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>0.10.7</version>
+        <scope>runtime</scope>
+    </dependency>

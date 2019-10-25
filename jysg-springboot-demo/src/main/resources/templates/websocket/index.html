@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebScoket广播式</title>
+    <!-- 浏览器标签图片 -->
+    <!--<link rel="shortcut icon" href="../view/static/images/favicon.ico"/>-->
+    <!-- FontAwesome字体图标 -->
+    <!--<link rel="stylesheet" type="text/css" href="../view/static/plugins/font-awesome/css/font-awesome.min.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="static/css/bcap.common.css">-->
+    <script type="text/javascript" src="../static/plugins/jquery/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="../static/plugins/websocket/sockjs.min.js"></script>
+    <script type="text/javascript" src="../static/plugins/websocket/stomp.min.js"></script>
+
+</head>
+<body onload="disconnect()">
+    <button id="connect" onclick="connect()">连接</button>
+    <button id="disconnect" onclick="disconnect()" disabled="disabled">断开连接</button><br/>
+    <div id="inputDiv">
+        输入名称：<input type="text" id="name"/><br/>
+        <button id="sendName" onclick="sendName()">发送</button><br/>
+        <p id="response"></p>
+    </div>
+
+    <script>
+        var stompClient = null;
+        //设置连接状态控制显示隐藏
+        function setConnected(connected) {
+            $("#connect").attr("disabled", connected);
+            $("#disconnect").attr("disabled", !connected);
+            if(!connected) {
+                $("#inputDiv").hide();
+            }else{
+                $("#inputDiv").show();
+            }
+            $("#reponse").html("");
+        }
+        //连接
+        function connect() {
+            var socket = new SockJS("/endpointWisely");
+            stompClient = Stomp.over(socket);
+            stompClient.connect({},function (frame) {
+                setConnected(true);
+                console.log("connected : "+frame);
+                stompClient.subscribe("/topic/getResponse",function (response) {
+                    showResponse(JSON.parse(response.body).responseMessage);
+                })
+            })
+        }
+        //断开连接
+        function disconnect(){
+            if(stompClient!=null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("disconnected!");
+        }
+        //发送名称到后台
+        function sendName(){
+            var name = $("#name").val();
+            stompClient.send("/welcome",{},JSON.stringify({'name':name}));
+        }
+        //显示socket返回消息内容
+        function showResponse(message) {
+            $("#response").html(message);
+        }
+    </script>
+
+</body>
+</html>

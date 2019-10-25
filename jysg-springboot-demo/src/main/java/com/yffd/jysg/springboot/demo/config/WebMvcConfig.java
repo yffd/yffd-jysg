@@ -66,8 +66,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")//允许被跨域的路径
                 .allowCredentials(true)//是否允许证书
-                .allowedMethods("*")//允许被跨域的请求方法
-                .allowedOrigins("*")//允许被跨域的请求域名
+                .allowedMethods("*")//允许被跨域的请求方法，POST、GET、PUT、DELETE等
+                .allowedOrigins("*")//允许被跨域的请求域名，允许哪些网站可以请求跨域资源
                 .allowedHeaders("*")//允许被跨域的请求header
                 .maxAge(3600)//允许被跨域的请求超时时间（秒）
                 ;
