@@ -8,8 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class JWTConfig implements WebMvcConfigurer {
-    @Override
+    /*@Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new JwtTokenInterceptor()).addPathPatterns("/api/**");
-    }
+    }*/
 }

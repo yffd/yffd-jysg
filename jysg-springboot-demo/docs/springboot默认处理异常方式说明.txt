@@ -1,0 +1,15 @@
+1.srping boot几种异常类型
+    1.1 rest接口运行时抛出的异常
+    1.2 访问视图时抛出的异常
+        a、访问一个存在的url返回一个不存的视图异常
+        b、访问一个不存的url异常
+
+springboot默认处理全局异常的类是org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController；
+默认处理异常的方法就是errorHtml error方法；
+当用浏览器访问出现异常时，执行的都是errorHtml方法；
+当用httpclient访问出现异常时，执行的都是error方法；
+
+总结：
+    定义完BasicErrorController和ControllerAdvice处理异常；
+    如果没有抛出异常，但访问不存在的url或视图时，会由BasicErrorController 处理并返回error.html页面；
+    如果抛出异常，如果不是自定义异常那么统一由Exception.class定义的handle处理，并返回指定的返回形式；

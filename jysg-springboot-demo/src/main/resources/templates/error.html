@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>error page</title>
+</head>
+<body>
+    <h3>访问url存在，但返回的对应视图不存在</h3>
+    <h6>status</h6>
+    <span th:text="${status}"></span>
+    <h6>error</h6>
+    <span th:text="${error}"></span>
+    <h6>message</h6>
+    <span th:text="${message}"></span>
+    <h6>path</h6>
+    <span th:text="${path}"></span>
+    <h6>timestamp</h6>
+    <span th:text="${timestamp}"></span>
+    <h6>trace</h6>
+    <span th:text="${trace}"></span>
+</body>
+</html>
