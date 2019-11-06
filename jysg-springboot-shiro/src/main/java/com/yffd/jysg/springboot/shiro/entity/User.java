@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class User implements Serializable {
-    private static final long serialVersionUID = -39575479994274737L;
     private Integer uid;
     private String username;
     private String password;
