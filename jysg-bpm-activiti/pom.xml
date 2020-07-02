@@ -10,7 +10,7 @@
 
     <properties>
         <activiti.engine.version>5.22.0</activiti.engine.version>
-        <mysql.connector.java.version>5.1.30</mysql.connector.java.version>
+        <mysql.connector.java.version>8.0.16</mysql.connector.java.version>
         <druid.version>1.0.5</druid.version>
         <commons.io.version>2.5</commons.io.version>
         <slf4j.version>1.7.25</slf4j.version>
