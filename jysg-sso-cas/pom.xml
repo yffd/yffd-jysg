@@ -28,7 +28,7 @@
         <isExecutable>false</isExecutable>
         <manifestFileToUse>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF</manifestFileToUse>
 
-        <shiro-spring.version>1.4.0</shiro-spring.version>
+        <shiro-spring.version>1.7.0</shiro-spring.version>
         <mysql-connector-java.version>5.1.43</mysql-connector-java.version>
         <!-- 日志框架 -->
         <slf4j.version>1.7.25</slf4j.version>
