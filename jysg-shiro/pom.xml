@@ -22,7 +22,7 @@
 
     <properties>
         <!-- shiro -->
-        <shiro.version>1.2.5</shiro.version>
+        <shiro.version>1.6.0</shiro.version>
         <!-- 数据源 -->
         <druid.version>1.1.6</druid.version>
         <mysql.version>5.1.43</mysql.version>
